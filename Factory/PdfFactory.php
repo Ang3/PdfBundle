@@ -38,7 +38,7 @@ class PdfFactory
      *
      * @return string
      */
-    public function generatePdfFromUrl($url, $pdfPath = null)
+    public function createFromUrl($url, $pdfPath = null)
     {
         // Lancement de l'application en mode console
         $application = new Application($this->kernel);

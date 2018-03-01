@@ -67,31 +67,15 @@ Usage
 
 ## From a controller
 
-### From HTML content
-
 ```php
 <?php
 // src/YouBundle/Controller/YourController.php
 
-// ...
-$src = '/*....*/';
-$target = '/*....*/';
-$this->get('pdf_factory')->createFromUrl($src, $target); # Returns binaries (target is optional)
-// ...
+// From URL
+$this->get('pdf_factory')->createFromUrl($src, $target); // Returns binaries (target is optional)
 
-```
-
-### From URL
-
-```php
-<?php
-// src/YouBundle/Controller/YourController.php
-
-// ...
-$htmlContent = '/*....*/';
-$target = '/*....*/';
-$this->get('pdf_factory')->createFromHtml($htmlContent, $target); # Returns binaries (target is optional)
-// ...
+// From HTML content
+$this->get('pdf_factory')->createFromHtml($htmlContent, $target); // Returns binaries (target is optional)
 
 ```
 
