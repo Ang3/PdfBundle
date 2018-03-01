@@ -15,7 +15,7 @@
         "psr-4": { "Ang3\\Bundle\\PdfBundle\\": "" }
     },
     "require": {
-        "php": "~7.1",
+        "php": ">=5.5.9",
         "symfony/framework-bundle": "~2.7|~3.0|~4.0"
     },
     "require-dev": {
