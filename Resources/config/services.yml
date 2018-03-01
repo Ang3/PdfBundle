@@ -1,0 +1,7 @@
+services:
+  pdf_factory:
+    class: Ang3\Bundle\PdfBundle\Factory\PdfFactory
+    arguments:
+      - '@kernel'
+      - '%ang3_pdf.parameters%'
+    public: true
