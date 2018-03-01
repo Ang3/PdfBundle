@@ -13,7 +13,6 @@ parameters:
           allow_single_line_closure: false
           position_after_functions_and_oop_constructs: "next"
       using_cache: true
-      config_contains_finder: true
       verbose: true
       diff: false
       triggered_by: ['php']
