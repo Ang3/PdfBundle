@@ -8,6 +8,19 @@ This [Symfony](https://symfony.com) bundle helps you to create PDF files easily 
 Installation
 ============
 
+Step 0: Download the Bundle
+---------------------------
+
+Install Google Chrome on your server.
+
+## On Ubuntu
+
+Source: https://doc.ubuntu-fr.org/google_chrome
+
+```console
+$ sudo apt-get install google-chrome-stable
+```
+
 Step 1: Download the Bundle
 ---------------------------
 
