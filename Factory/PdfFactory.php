@@ -89,6 +89,6 @@ class PdfFactory
         $tmpFile = new TemporaryFile($html);
 
         // Retour des données binaires
-        return $this->generatePdfFromUrl(sprintf('file://%s', $tmpFile->getRealPath()), $pdfPath);
+        return $this->createFromUrl(sprintf('file://%s', $tmpFile->getRealPath()), $pdfPath);
     }
 }
