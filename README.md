@@ -72,10 +72,10 @@ Usage
 // src/YouBundle/Controller/YourController.php
 
 // From URL
-$this->get('pdf_factory')->createFromUrl($src, $target); // Returns binaries (target is optional)
+$this->get('ang3_pdf.factory')->createFromUrl($src, $target); // Returns binaries (target is optional)
 
 // From HTML content
-$this->get('pdf_factory')->createFromHtml($htmlContent, $target); // Returns binaries (target is optional)
+$this->get('ang3_pdf.factory')->createFromHtml($htmlContent, $target); // Returns binaries (target is optional)
 
 ```
 

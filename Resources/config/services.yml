@@ -1,5 +1,5 @@
 services:
-  pdf_factory:
+  ang3_pdf.factory:
     class: Ang3\Bundle\PdfBundle\Factory\PdfFactory
     arguments:
       - '@kernel'
