@@ -2,12 +2,9 @@
 
 namespace Ang3\Bundle\PdfBundle\Controller;
 
-use Exception;
-use SplFileInfo;
 use Ang3\Bundle\PdfBundle\Response\PdfResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
-use Symfony\Component\HttpFoundation\File\File;
 
 /**
  * PDF controller trait.
@@ -17,9 +14,9 @@ use Symfony\Component\HttpFoundation\File\File;
 trait PdfControllerTrait
 {
     /**
-     * Creates a PDF response from a file.
+     * Creates a PDF response from HTML.
      *
-     * @param File|string $pdfFile
+     * @param string      $html
      * @param string|null $fileName
      * @param string      $contentDisposition
      * @param int         $status
@@ -27,21 +24,10 @@ trait PdfControllerTrait
      *
      * @return PdfResponse
      */
-    public function createPdfResponseFromFile($pdfFile, $fileName = null, $contentDisposition = ResponseHeaderBag::DISPOSITION_ATTACHMENT, $status = 200, $headers = [])
+    public function createPdfResponseFromHtml($html, $fileName = null, $contentDisposition = ResponseHeaderBag::DISPOSITION_ATTACHMENT, $status = 200, $headers = [])
     {
-        // Si le fichier n'est pas une instance de fichier Symfony
-        if ($pdfFile instanceof File) {
-            // Construction d'un fichier symfony
-            $pdfFile = new File((string) $pdfFile);
-        }
-
-        // Si le fichier n'est pas lisible
-        if (!$pdfFile->isReadable()) {
-            throw new Exception('Unable to create a PDF response because the file "%s" is not readable.');
-        }
-
         return $this->createPdfResponseFromBinaries(
-            file_get_contents($pdfFile instanceof SplFileInfo ? $pdfFile->getRealPath() : (string) $pdfFile),
+            $this->get('ang3_pdf.factory')->createFromHtml($html),
             $fileName,
             $contentDisposition,
             $status,
@@ -52,7 +38,7 @@ trait PdfControllerTrait
     /**
      * Creates a PDF response from PDF data.
      *
-     * @param string      $data
+     * @param string      $binaries
      * @param string|null $fileName
      * @param string      $contentDisposition
      * @param int         $status
@@ -60,8 +46,14 @@ trait PdfControllerTrait
      *
      * @return PdfResponse
      */
-    public function createPdfResponseFromBinaries($data, $fileName = null, $contentDisposition = ResponseHeaderBag::DISPOSITION_ATTACHMENT, $status = 200, $headers = [])
+    public function createPdfResponseFromBinaries($binaries, $fileName = null, $contentDisposition = ResponseHeaderBag::DISPOSITION_ATTACHMENT, $status = 200, $headers = [])
     {
-        return new PdfResponse((string) $data, $fileName, $contentDisposition, $status, $headers);
+        return new PdfResponse(
+            $binaries,
+            $fileName,
+            $contentDisposition,
+            $status,
+            $headers
+        );
     }
 }

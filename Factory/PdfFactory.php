@@ -86,7 +86,7 @@ class PdfFactory
     public function createFromHtml($html, $pdfPath = null)
     {
         // Création d'un fichier temporaire
-        $tmpFile = new TemporaryFile($html);
+        $tmpFile = new TemporaryFile((string) $html);
 
         // Retour des données binaires
         return $this->createFromUrl(sprintf('file://%s', $tmpFile->getRealPath()), $pdfPath);

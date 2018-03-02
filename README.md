@@ -78,9 +78,11 @@ Usage
 
 ## From a controller
 
+### Using the factory directly
+
 ```php
 <?php
-// src/YouBundle/Controller/YourController.php
+// src/YourBundle/Controller/YourController.php
 
 // From URL
 $this->get('ang3_pdf.factory')->createFromUrl($src, $target); // Returns binaries (target is optional)
@@ -90,6 +92,39 @@ $this->get('ang3_pdf.factory')->createFromHtml($htmlContent, $target); // Return
 
 ```
 
+### Using provided PdfControllerTrait
+
+```php
+<?php
+// src/YourBundle/Controller/YourController.php
+
+// Do not forget the "use" statement
+use Ang3\Bundle\PdfBundle\Controller\PdfControllerTrait;
+
+class YourController
+{
+  use PdfControllerTrait;
+
+  /**
+   * ...
+   */
+  public function yourAction()
+  {
+    // ...
+
+    return $this->createPdfResponseFromHtml($htmlContent, $pdfFileName, 'inline', 200, []); // Wrap PDF into browser
+    return $this->createPdfResponseFromHtml($htmlContent, $pdfFileName, 'inline'); // Similar
+
+    // Or
+
+    return $this->createPdfResponseFromHtml($htmlContent, $pdfFileName, 'attachment', 200, []); // download file
+    return $this->createPdfResponseFromHtml($htmlContent, $pdfFileName); // Similar
+  }
+}
+
+```
+
+
 ## From anywhere
 
-Inject the service and calls methods as above.
+Inject the service ```ang3_pdf.factory```.
