@@ -8,8 +8,8 @@ This [Symfony](https://symfony.com) bundle helps you to create PDF files easily 
 Installation
 ============
 
-Step 0: Download the Bundle
----------------------------
+Step 0: Download and install Google Chrome
+------------------------------------------
 
 Install Google Chrome on your server.
 
@@ -60,6 +60,17 @@ class AppKernel extends Kernel
 
   // ...
 }
+```
+
+Step 3: Configure your app (recommended)
+--------------------------
+
+I highly recommand to configure the exact path of google chrome, default valus is ```/usr/bin/google-chrome-stable```:
+
+```yaml
+# app/config/config.yml
+ang3_pdf:
+  chrome_path: ~ # default value : /usr/bin/google-chrome-stable
 ```
 
 Usage
