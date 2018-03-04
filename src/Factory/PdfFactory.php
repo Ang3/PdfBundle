@@ -2,7 +2,7 @@
 
 namespace Ang3\Bundle\PdfBundle\Factory;
 
-use Ang3\Component\Filesystem\File\TemporaryFile;
+use Neutron\TemporaryFilesystem\TemporaryFilesystem;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Output\NullOutput;
@@ -21,6 +21,13 @@ class PdfFactory
     private $kernel;
 
     /**
+     * Sumfony kernel.
+     *
+     * @var TemporaryFilesystem
+     */
+    private $temporaryFilesystem;
+
+    /**
      * Constructor of the PDF.
      *
      * @param KernelInterface $kernel
@@ -28,6 +35,7 @@ class PdfFactory
     public function __construct(KernelInterface $kernel)
     {
         $this->kernel = $kernel;
+        $this->temporaryFilesystem = TemporaryFilesystem::create();
     }
 
     /**
@@ -44,17 +52,8 @@ class PdfFactory
         $application = new Application($this->kernel);
         $application->setAutoExit(false);
 
-        // Récupération du chemin cible du pdf
-        $target = $pdfPath;
-
-        // Si pas de chemin pour le PDF
-        if (!$target) {
-            // Création d'un fichier temporaire
-            $tmpFile = new TemporaryFile();
-
-            // Définition du chemin du pdf selon le chemin du fichier temporaire
-            $target = $tmpFile->getRealPath();
-        }
+        // Définition de la cible
+        $target = $pdfPath ?: $this->temporaryFilesystem->createTemporaryFile();
 
         // Configuration de la commande à lancer
         $input = new ArrayInput(array(
@@ -85,10 +84,6 @@ class PdfFactory
      */
     public function createFromHtml($html, $pdfPath = null)
     {
-        // Création d'un fichier temporaire
-        $tmpFile = new TemporaryFile((string) $html);
-
-        // Retour des données binaires
-        return $this->createFromUrl(sprintf('file://%s', $tmpFile->getRealPath()), $pdfPath);
+        return $this->createFromUrl(sprintf('file://%s', $this->temporaryFilesystem->createTemporaryFile()), $pdfPath);
     }
 }
