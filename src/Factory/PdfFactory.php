@@ -53,7 +53,7 @@ class PdfFactory
         $application->setAutoExit(false);
 
         // Définition de la cible
-        $target = $pdfPath ?: $this->temporaryFilesystem->createTemporaryFile();
+        $target = $pdfPath ?: $this->temporaryFilesystem->createTemporaryFile('pdf/', null, 'pdf');
 
         // Configuration de la commande à lancer
         $input = new ArrayInput(array(
@@ -84,6 +84,6 @@ class PdfFactory
      */
     public function createFromHtml($html, $pdfPath = null)
     {
-        return $this->createFromUrl(sprintf('file://%s', $this->temporaryFilesystem->createTemporaryFile()), $pdfPath);
+        return $this->createFromUrl(sprintf('file://%s', $this->temporaryFilesystem->createTemporaryFile('html/', null, 'html')), $pdfPath);
     }
 }
