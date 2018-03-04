@@ -53,7 +53,7 @@ class PdfFactory
         $application->setAutoExit(false);
 
         // Définition de la cible
-        $target = $pdfPath ?: $this->temporaryFilesystem->createTemporaryFile('pdf/', null, 'pdf');
+        $target = $pdfPath ?: $this->temporaryFilesystem->createTemporaryFile('pdf_', null, 'pdf');
 
         // Configuration de la commande à lancer
         $input = new ArrayInput(array(
@@ -67,11 +67,8 @@ class PdfFactory
         $output = new NullOutput();
         $application->run($input, $output);
 
-        // Récupération des données binaires du PDF
-        $binaries = file_get_contents($target);
-
-        // Retour des données du fichier
-        return $binaries;
+        // Retour du chemin local du fichier PDF
+        return $target;
     }
 
     /**
@@ -84,6 +81,6 @@ class PdfFactory
      */
     public function createFromHtml($html, $pdfPath = null)
     {
-        return $this->createFromUrl(sprintf('file://%s', $this->temporaryFilesystem->createTemporaryFile('html/', null, 'html')), $pdfPath);
+        return $this->createFromUrl(sprintf('file://%s', $this->temporaryFilesystem->createTemporaryFile('html_', null, 'html')), $pdfPath);
     }
 }

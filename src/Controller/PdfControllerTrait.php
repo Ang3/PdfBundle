@@ -26,13 +26,23 @@ trait PdfControllerTrait
      */
     public function createPdfResponseFromHtml($html, $fileName = null, $contentDisposition = ResponseHeaderBag::DISPOSITION_ATTACHMENT, $status = 200, $headers = [])
     {
-        return $this->createPdfResponseFromBinaries(
-            $this->get('ang3_pdf.factory')->createFromHtml($html),
+        // Création du fichier PDF et récupération du chemin local
+        $pdfFile = $this->get('ang3_pdf.factory')->createFromHtml($html);
+
+        // Création de la réponse
+        $response = $this->createPdfResponseFromBinaries(
+            file_get_contents($pdfFile),
             $fileName,
             $contentDisposition,
             $status,
             $headers
         );
+
+        // Suppression du fichier PDF
+        $this->get('filesystem')->remove($pdfFile);
+
+        // Retour de la réponse
+        return $response;
     }
 
     /**
