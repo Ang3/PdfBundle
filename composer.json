@@ -17,7 +17,7 @@
     "require": {
         "php": ">=5.5.9",
         "symfony/framework-bundle": "~2.8|~3.0|~4.0",
-        "ang3/temporary-filesystem-bundle": "^1.0"
+        "neutron/temporary-filesystem": "^2.3"
     },
     "require-dev": {
         "phpunit/phpunit": "^6.4"
