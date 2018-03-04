@@ -94,36 +94,7 @@ $this->get('ang3_pdf.factory')->createFromHtml($htmlContent, $target); // Return
 
 ### Using provided PdfControllerTrait
 
-```php
-<?php
-// src/YourBundle/Controller/YourController.php
-
-// Do not forget the "use" statement
-use Ang3\Bundle\PdfBundle\Controller\PdfControllerTrait;
-
-class YourController
-{
-  use PdfControllerTrait;
-
-  /**
-   * ...
-   */
-  public function yourAction()
-  {
-    // ...
-
-    return $this->createPdfResponseFromHtml($htmlContent, $pdfFileName, 'inline', 200, []); // Wrap PDF into browser
-    return $this->createPdfResponseFromHtml($htmlContent, $pdfFileName, 'inline'); // Similar
-
-    // Or
-
-    return $this->createPdfResponseFromHtml($htmlContent, $pdfFileName, 'attachment', 200, []); // download file
-    return $this->createPdfResponseFromHtml($htmlContent, $pdfFileName); // Similar
-  }
-}
-
-```
-
+Look at file [Ang3\Bundle\PdfBundle\Controller\PdfControllerTrait](https://github.com/Ang3/PdfBundle/blob/master/src/Controller/PdfControllerTrait.php).
 
 ## From anywhere
 
