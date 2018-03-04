@@ -6,6 +6,7 @@ use Neutron\TemporaryFilesystem\TemporaryFilesystem;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Output\NullOutput;
+use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpKernel\KernelInterface;
 
 /**
@@ -19,6 +20,13 @@ class PdfFactory
      * @var KernelInterface
      */
     private $kernel;
+
+    /**
+     * Symfony filesystem component.
+     *
+     * @var Filesystem
+     */
+    private $filesystem;
 
     /**
      * Sumfony kernel.
@@ -35,6 +43,7 @@ class PdfFactory
     public function __construct(KernelInterface $kernel)
     {
         $this->kernel = $kernel;
+        $this->filesystem = new Filesystem();
         $this->temporaryFilesystem = TemporaryFilesystem::create();
     }
 
@@ -81,6 +90,10 @@ class PdfFactory
      */
     public function createFromHtml($html, $pdfPath = null)
     {
-        return $this->createFromUrl(sprintf('file://%s', $this->temporaryFilesystem->createTemporaryFile('html_', null, 'html')), $pdfPath);
+        $htmlFile = $this->temporaryFilesystem->createTemporaryFile('html_', null, 'html');
+
+        $this->filesystem->dumpFile($htmlFile, $html);
+
+        return $this->createFromUrl(sprintf('file://%s', $htmlFile), $pdfPath);
     }
 }
