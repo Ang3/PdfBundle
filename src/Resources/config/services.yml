@@ -1,4 +1,8 @@
 services:
+  Ang3\Bundle\PdfBundle\Command\:
+    resource: '../../Command/*'
+    tags: ['console.command']
+
   ang3_pdf.factory:
     class: Ang3\Bundle\PdfBundle\Factory\PdfFactory
     arguments:

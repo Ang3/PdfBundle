@@ -90,10 +90,19 @@ class PdfFactory
      */
     public function createFromHtml($html, $pdfPath = null)
     {
+        // Création du fichier html temporaire
         $htmlFile = $this->temporaryFilesystem->createTemporaryFile('html_', null, 'html');
 
+        // Enregistrement du contenu du fichier HTML
         $this->filesystem->dumpFile($htmlFile, $html);
 
-        return $this->createFromUrl(sprintf('file://%s', $htmlFile), $pdfPath);
+        // Création du fichier PDF selon l'URL du fichier HTML
+        $pdfFile = $this->createFromUrl(sprintf('file://%s', $htmlFile), $pdfPath);
+
+        // Supression du fichier HTML
+        $this->filesystem->remove($htmlFile);
+
+        // Retour du chemin du fichier PDF
+        return $pdfFile;
     }
 }

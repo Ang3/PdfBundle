@@ -22,13 +22,13 @@ class GenerateCommand extends ContainerAwareCommand
     protected function configure()
     {
         $this
-			->setName('ang3:pdf:generate')
-			->setDescription('Generation of pdf file - Usage : ang3:pdf:generate <url> [--target|-t pdf_file]')
-			->setHelp('This command generates a PDF from html file.')
+            ->setName('ang3:pdf:generate')
+            ->setDescription('Generation of pdf file - Usage : ang3:pdf:generate <url> [--target|-t pdf_file]')
+            ->setHelp('This command generates a PDF from html file.')
             ->addOption('chrome-path', 'c', InputOption::VALUE_OPTIONAL, 'Path of google chrome executable (default: /usr/bin/google-chrome-stable).')
-			->addArgument('url', InputArgument::REQUIRED, 'URL of the HTML file')
-			->addArgument('target', InputArgument::REQUIRED, 'Location of generated PDF')
-		;
+            ->addArgument('url', InputArgument::REQUIRED, 'URL of the HTML file')
+            ->addArgument('target', InputArgument::REQUIRED, 'Location of generated PDF')
+        ;
     }
 
     /**
