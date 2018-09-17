@@ -26,6 +26,12 @@ class Configuration implements ConfigurationInterface
                     ->defaultValue('/usr/bin/google-chrome-stable')
                 ->end()
             ->end()
+            ->children()
+                ->scalarNode('pdfunite_path')
+                    ->cannotBeEmpty()
+                    ->defaultValue('/usr/bin/pdfunite')
+                ->end()
+            ->end()
         ;
 
         return $treeBuilder;

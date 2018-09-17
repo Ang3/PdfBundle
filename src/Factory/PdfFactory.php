@@ -2,6 +2,7 @@
 
 namespace Ang3\Bundle\PdfBundle\Factory;
 
+use InvalidArgumentException;
 use Neutron\TemporaryFilesystem\TemporaryFilesystem;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Input\ArrayInput;
@@ -104,5 +105,54 @@ class PdfFactory
 
         // Retour du chemin du fichier PDF
         return $pdfFile;
+    }
+
+    /**
+     * Merges all pdf files and creates an unique PDF to target URL.
+     * 
+     * @param  array  $pdfFiles
+     * @param  string $target
+     *
+     * @throws InvalidArgumentException When PDF file(s) was not found.
+     * 
+     * @return string
+     */
+    public function merge(array $pdfFiles, $target)
+    {
+        // Initialisation des fichiers introuvables éventuels
+        $filesNotFound = [];
+
+        // Pour chaque fichier PDF
+        foreach($pdfFiles as $pdfFile) {
+            // Si le fichier n'existe pas
+            if(!$this->filesystem->exists($pdfFile)) {
+                // Enregistrement de l'URL du fichier introuvable
+                $filesNotFound[] = sprintf('"$pdfFile"');
+            }
+        }
+
+        // Si on a un/des fichier(s) non trouvé(s)
+        if(count($filesNotFound) > 0) {
+            throw new InvalidArgumentException(sprintf('Unable to find PDF file(s) %s', implode(',', $filesNotFound)));
+        }
+
+        // Lancement de l'application en mode console
+        $application = new Application($this->kernel);
+        $application->setAutoExit(false);
+
+        // Définition de la cible
+        $target = $target ?: $this->temporaryFilesystem->createTemporaryFile('pdf_', null, 'pdf');
+
+        // Configuration de la commande à lancer
+        $input = new ArrayInput(array(
+           'command' => 'ang3:pdf:merge',
+           'files' => explode(',', $pdfFiles),
+           'target' => (string) $target,
+           '-vvv',
+        ));
+
+        // Lancement de la commande
+        $output = new NullOutput();
+        $application->run($input, $output);
     }
 }
