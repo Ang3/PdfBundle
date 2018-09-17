@@ -56,7 +56,7 @@ class MergeCommand extends ContainerAwareCommand
         $pdfunitePath = $input->getOption('pdfunite-path') ?: $this->getContainer()->getParameter('ang3_pdf.parameters')['pdfunite_path'];
 
         // Génération de la commande
-        $command = sprintf('%s %s %s', $pdfunitePath, $files, $target);
+        $command = sprintf('%s %s %s', $pdfunitePath, str_replace(',', ' ', $files), $target);
 
         // Génération du processus
         $process = new Process($command);
