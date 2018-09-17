@@ -123,7 +123,10 @@ class PdfFactory
         $filesNotFound = [];
 
         // Pour chaque fichier PDF
-        foreach($pdfFiles as $pdfFile) {
+        foreach($pdfFiles as $key => $pdfFile) {
+            // Retrait de tous les espaces en trop dans le chemin
+            $pdfFile = trim($pdfFile);
+
             // Si le fichier n'existe pas
             if(!$this->filesystem->exists($pdfFile)) {
                 // Enregistrement de l'URL du fichier introuvable
@@ -154,5 +157,8 @@ class PdfFactory
         // Lancement de la commande
         $output = new NullOutput();
         $application->run($input, $output);
+
+        // Retour du chemin du fichier PDF
+        return $target;
     }
 }
