@@ -3,6 +3,7 @@
 namespace Ang3\Bundle\PdfBundle\Factory;
 
 use InvalidArgumentException;
+use RuntimeException;
 use Neutron\TemporaryFilesystem\TemporaryFilesystem;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Input\ArrayInput;
@@ -75,7 +76,12 @@ class PdfFactory
 
         // Lancement de la commande
         $output = new NullOutput();
-        $application->run($input, $output);
+        $result = $application->run($input, $output);
+
+        // Si la commande a échoué
+        if($result != 0) {
+            throw new RuntimeException(sprintf('Unable to create PDF - Error code: %d', $result));
+        }
 
         // Retour du chemin local du fichier PDF
         return $target;
