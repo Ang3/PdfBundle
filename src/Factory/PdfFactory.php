@@ -2,6 +2,7 @@
 
 namespace Ang3\Bundle\PdfBundle\Factory;
 
+use Exception;
 use InvalidArgumentException;
 use RuntimeException;
 use Neutron\TemporaryFilesystem\TemporaryFilesystem;
@@ -55,6 +56,8 @@ class PdfFactory
      * @param string      $url
      * @param string|null $pdfPath
      *
+     * @throws RuntimeException When creating failed.
+     *
      * @return string
      */
     public function createFromUrl($url, $pdfPath = null)
@@ -93,6 +96,8 @@ class PdfFactory
      * @param string      $html
      * @param string|null $pdfPath
      *
+     * @throws RuntimeException When creating failed.
+     *
      * @return string
      */
     public function createFromHtml($html, $pdfPath = null)
@@ -103,11 +108,15 @@ class PdfFactory
         // Enregistrement du contenu du fichier HTML
         $this->filesystem->dumpFile($htmlFile, $html);
 
-        // Création du fichier PDF selon l'URL du fichier HTML
-        $pdfFile = $this->createFromUrl(sprintf('file://%s', $htmlFile), $pdfPath);
-
-        // Supression du fichier HTML
-        $this->filesystem->remove($htmlFile);
+        try {
+            // Création du fichier PDF selon l'URL du fichier HTML
+            $pdfFile = $this->createFromUrl(sprintf('file://%s', $htmlFile), $pdfPath);
+        } catch(Exception $e) {
+            throw new RuntimeException(sprintf("Failed to create PDF from HTML - %s", $e->getMessage()));
+        } finally {
+            // Supression du fichier HTML
+            $this->filesystem->remove($htmlFile);
+        }
 
         // Retour du chemin du fichier PDF
         return $pdfFile;
