@@ -66,14 +66,18 @@ class PdfFactory
         $application = new Application($this->kernel);
         $application->setAutoExit(false);
 
-        // Définition de la cible
+        /**
+         * Définition de la cible
+         * 
+         * @var string
+         */
         $target = $pdfPath ?: $this->temporaryFilesystem->createTemporaryFile('pdf_', null, 'pdf');
 
         // Configuration de la commande à lancer
         $input = new ArrayInput(array(
            'command' => 'ang3:pdf:generate',
-           'url' => (string) $url,
-           'target' => (string) $target,
+           'url' => $url,
+           'target' => $target,
            '-vvv',
         ));
 
@@ -102,7 +106,11 @@ class PdfFactory
      */
     public function createFromHtml($html, $pdfPath = null)
     {
-        // Création du fichier html temporaire
+        /**
+         * Création du fichier html temporaire
+         * 
+         * @var string
+         */
         $htmlFile = $this->temporaryFilesystem->createTemporaryFile('html_', null, 'html');
 
         // Enregistrement du contenu du fichier HTML
@@ -158,14 +166,18 @@ class PdfFactory
         $application = new Application($this->kernel);
         $application->setAutoExit(false);
 
-        // Définition de la cible
+        /**
+         * Définition du chemin cible
+         * 
+         * @var string
+         */
         $target = $target ?: $this->temporaryFilesystem->createTemporaryFile('pdf_', null, 'pdf');
 
         // Configuration de la commande à lancer
         $input = new ArrayInput(array(
            'command' => 'ang3:pdf:merge',
            'files' => explode(',', $pdfFiles),
-           'target' => (string) $target,
+           'target' => $target,
            '-vvv',
         ));
 
