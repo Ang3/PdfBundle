@@ -56,7 +56,7 @@ class PdfFactory
      * @param string      $url
      * @param string|null $pdfPath
      *
-     * @throws RuntimeException When creating failed.
+     * @throws RuntimeException when creating failed
      *
      * @return string
      */
@@ -67,8 +67,8 @@ class PdfFactory
         $application->setAutoExit(false);
 
         /**
-         * Définition de la cible
-         * 
+         * Définition de la cible.
+         *
          * @var string
          */
         $target = $pdfPath ?: $this->temporaryFilesystem->createTemporaryFile('pdf_', null, 'pdf');
@@ -86,7 +86,7 @@ class PdfFactory
         $result = $application->run($input, $output);
 
         // Si la commande a échoué
-        if($result != 0) {
+        if (0 != $result) {
             throw new RuntimeException(sprintf('Unable to create PDF - Error code: %d', $result));
         }
 
@@ -100,15 +100,15 @@ class PdfFactory
      * @param string      $html
      * @param string|null $pdfPath
      *
-     * @throws RuntimeException When creating failed.
+     * @throws RuntimeException when creating failed
      *
      * @return string
      */
     public function createFromHtml($html, $pdfPath = null)
     {
         /**
-         * Création du fichier html temporaire
-         * 
+         * Création du fichier html temporaire.
+         *
          * @var string
          */
         $htmlFile = $this->temporaryFilesystem->createTemporaryFile('html_', null, 'html');
@@ -119,8 +119,8 @@ class PdfFactory
         try {
             // Création du fichier PDF selon l'URL du fichier HTML
             $pdfFile = $this->createFromUrl(sprintf('file://%s', $htmlFile), $pdfPath);
-        } catch(Exception $e) {
-            throw new RuntimeException(sprintf("Failed to create PDF from HTML - %s", $e->getMessage()));
+        } catch (Exception $e) {
+            throw new RuntimeException(sprintf('Failed to create PDF from HTML - %s', $e->getMessage()));
         } finally {
             // Supression du fichier HTML
             $this->filesystem->remove($htmlFile);
@@ -132,12 +132,12 @@ class PdfFactory
 
     /**
      * Merges all pdf files and creates an unique PDF to target URL.
-     * 
-     * @param  array  $pdfFiles
-     * @param  string $target
      *
-     * @throws InvalidArgumentException When PDF file(s) was not found.
-     * 
+     * @param array  $pdfFiles
+     * @param string $target
+     *
+     * @throws InvalidArgumentException when PDF file(s) was not found
+     *
      * @return string
      */
     public function merge(array $pdfFiles, $target)
@@ -146,19 +146,19 @@ class PdfFactory
         $filesNotFound = [];
 
         // Pour chaque fichier PDF
-        foreach($pdfFiles as $key => $pdfFile) {
+        foreach ($pdfFiles as $key => $pdfFile) {
             // Retrait de tous les espaces en trop dans le chemin
             $pdfFile = trim($pdfFile);
 
             // Si le fichier n'existe pas
-            if(!$this->filesystem->exists($pdfFile)) {
+            if (!$this->filesystem->exists($pdfFile)) {
                 // Enregistrement de l'URL du fichier introuvable
                 $filesNotFound[] = sprintf('"$pdfFile"');
             }
         }
 
         // Si on a un/des fichier(s) non trouvé(s)
-        if(count($filesNotFound) > 0) {
+        if (count($filesNotFound) > 0) {
             throw new InvalidArgumentException(sprintf('Unable to find PDF file(s) %s', implode(',', $filesNotFound)));
         }
 
@@ -167,8 +167,8 @@ class PdfFactory
         $application->setAutoExit(false);
 
         /**
-         * Définition du chemin cible
-         * 
+         * Définition du chemin cible.
+         *
          * @var string
          */
         $target = $target ?: $this->temporaryFilesystem->createTemporaryFile('pdf_', null, 'pdf');
