@@ -1,7 +1,13 @@
 services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: false
+    
+  Ang3\Component\Pdf\PdfFactory: ~
+
   ang3_pdf.factory:
-    class: Ang3\Bundle\PdfBundle\Factory\PdfFactory
+    alias: Ang3\Component\Pdf\PdfFactory
     arguments:
-      - '@kernel'
       - '%ang3_pdf.parameters%'
     public: true

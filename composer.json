@@ -1,8 +1,8 @@
 {
     "name": "ang3/pdf-bundle",
     "type": "symfony-bundle",
-    "description": "This bundles helps you to create PDF files from URL or HTML content with Google Chrome.",
-    "keywords": ["symfony", "pdf", "html", "url", "chrome", "file"],
+    "description": "Symfony integration of component ang3/php-pdf",
+    "keywords": ["symfony", "pdf"],
     "license": "MIT",
     "authors": [
         {
@@ -15,8 +15,12 @@
         "psr-4": { "Ang3\\Bundle\\PdfBundle\\": "src/" }
     },
     "require": {
-        "php": ">=5.5.9",
-        "symfony/framework-bundle": "~3.0 || ~4.0",
-        "neutron/temporary-filesystem": "^2.3"
+        "php": "^7.1",
+        "ang3/php-pdf": "^1.0",
+        "symfony/framework-bundle": "^4.0"
+    },
+    "require-dev": {
+        "symfony/var-dumper": "^4.3",
+        "symfony/phpunit-bridge": "^4.3"
     }
 }

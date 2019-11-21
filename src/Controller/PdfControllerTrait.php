@@ -14,20 +14,14 @@ use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 trait PdfControllerTrait
 {
     /**
-     * Creates a PDF response from HTML.
-     *
-     * @param string      $html
-     * @param string|null $fileName
-     * @param string      $contentDisposition
-     * @param int         $status
-     * @param array       $headers
+     * Creates a PDF response from content.
      *
      * @return PdfResponse
      */
-    public function createPdfResponseFromHtml($html, $fileName = null, $contentDisposition = ResponseHeaderBag::DISPOSITION_ATTACHMENT, $status = 200, $headers = [])
+    public function createPdfResponseFromHtml(string $content, string $fileName = null, string $contentDisposition = ResponseHeaderBag::DISPOSITION_ATTACHMENT, int $status = 200, array $headers = [])
     {
         // Création du fichier PDF et récupération du chemin local
-        $pdfFile = $this->get('ang3_pdf.factory')->createFromHtml($html);
+        $pdfFile = $this->get('ang3_pdf.factory')->createFromHtml($content);
 
         // Création de la réponse
         $response = $this->createPdfResponseFromBinaries(
@@ -46,17 +40,11 @@ trait PdfControllerTrait
     }
 
     /**
-     * Creates a PDF response from PDF data.
-     *
-     * @param string      $binaries
-     * @param string|null $fileName
-     * @param string      $contentDisposition
-     * @param int         $status
-     * @param array       $headers
+     * Creates a PDF response from PDF binary data.
      *
      * @return PdfResponse
      */
-    public function createPdfResponseFromBinaries($binaries, $fileName = null, $contentDisposition = ResponseHeaderBag::DISPOSITION_ATTACHMENT, $status = 200, $headers = [])
+    public function createPdfResponseFromBinaries(string $binaries, string $fileName = null, string $contentDisposition = ResponseHeaderBag::DISPOSITION_ATTACHMENT, int $status = 200, array $headers = [])
     {
         return new PdfResponse(
             $binaries,

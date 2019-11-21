@@ -13,16 +13,7 @@ use Symfony\Component\HttpFoundation\ResponseHeaderBag;
  */
 class PdfResponse extends Response
 {
-    /**
-     * Constructor of the response.
-     *
-     * @param string $content
-     * @param string $fileName
-     * @param string $contentDisposition
-     * @param int    $status
-     * @param array  $headers
-     */
-    public function __construct($content, $fileName = null, $contentDisposition = ResponseHeaderBag::DISPOSITION_ATTACHMENT, $status = 200, $headers = [])
+    public function __construct(string $content, string $fileName = null, string $contentDisposition = ResponseHeaderBag::DISPOSITION_ATTACHMENT, int $status = 200, array $headers = [])
     {
         // Hydratation des directives possibles
         $contentDispositionDirectives = [
@@ -39,7 +30,7 @@ class PdfResponse extends Response
         parent::__construct($content, $status, $headers);
 
         // Définition du nom du fichier PDF
-        $fileName = $fileName ?: uniqid('pdf_').time().'.pdf';
+        $fileName = $fileName ?: uniqid('pdf_').date('Ymd_His').'.pdf';
 
         // Enregistrement des entêtes
         $this->headers->add(['Content-Type' => 'application/pdf']);

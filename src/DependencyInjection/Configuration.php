@@ -2,12 +2,12 @@
 
 namespace Ang3\Bundle\PdfBundle\DependencyInjection;
 
+use Ang3\Component\Pdf\Command\GenerateCommand;
+use Ang3\Component\Pdf\Command\MergeCommand;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
 /**
- * Configuration du bundle.
- *
  * @author Joanis ROUANET
  */
 class Configuration implements ConfigurationInterface
@@ -23,13 +23,13 @@ class Configuration implements ConfigurationInterface
             ->children()
                 ->scalarNode('chrome_path')
                     ->cannotBeEmpty()
-                    ->defaultValue('/usr/bin/google-chrome-stable')
+                    ->defaultValue(GenerateCommand::DEFAULT_BIN_PATH)
                 ->end()
             ->end()
             ->children()
                 ->scalarNode('pdfunite_path')
                     ->cannotBeEmpty()
-                    ->defaultValue('/usr/bin/pdfunite')
+                    ->defaultValue(MergeCommand::DEFAULT_BIN_PATH)
                 ->end()
             ->end()
         ;

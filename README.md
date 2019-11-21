@@ -39,63 +39,55 @@ Step 2: Enable the Bundle
 -------------------------
 
 Then, enable the bundle by adding it to the list of registered bundles
-in the `app/AppKernel.php` file of your project:
+in the `config/bundles.php` file of your project if it's not already done:
 
 ```php
 <?php
-// app/AppKernel.php
+// config/bunles.php
 
-// ...
-class AppKernel extends Kernel
+return [
+  // ...
+  Ang3\Bundle\PdfBundle\Ang3PdfBundle::class => ['dev' => true, 'test' => true],
+];
+```
+
+Step 3: Configure your app (recommended)
+----------------------------------------
+
+I highly recommand to configure the exact path of google chrome and pdfunite:
+
+```yaml
+# app/config/config.yml
+ang3_pdf:
+  chrome_path: ~ # default value : /usr/bin/google-chrome-stable
+  pdfunite_path: ~ # default value : /usr/bin/pdfunite
+```
+
+Usage
+=====
+
+Inject the factory class.
+
+```php
+<?php
+
+use Ang3\Component\Pdf\PdfFactory; // DO NOT FORGET
+
+class PdfManager
 {
-  public function registerBundles()
-  {
-    $bundles = array(
-      // ...
-      new Ang3\Bundle\PdfBundle\Ang3PdfBundle(),
-    );
+  /**
+   * @var PdfFactory
+   */
+  private $pdfFactory;
 
-    // ...
+  public function __construct(PdfFactory $pdfFactory)
+  {
+    $this->pdfFactory = $pdfFactory;
   }
 
   // ...
 }
 ```
 
-Step 3: Configure your app (recommended)
---------------------------
-
-I highly recommand to configure the exact path of google chrome, default valus is ```/usr/bin/google-chrome-stable```:
-
-```yaml
-# app/config/config.yml
-ang3_pdf:
-  chrome_path: ~ # default value : /usr/bin/google-chrome-stable
-```
-
-Usage
-=====
-
-## From a controller
-
-### Using the factory directly
-
-```php
-<?php
-// src/YourBundle/Controller/YourController.php
-
-// From URL
-$this->get('ang3_pdf.factory')->createFromUrl($src, $target); // Returns binaries (target is optional)
-
-// From HTML content
-$this->get('ang3_pdf.factory')->createFromHtml($htmlContent, $target); // Returns binaries (target is optional)
-
-```
-
-### Using provided PdfControllerTrait
-
-Look at file [Ang3\Bundle\PdfBundle\Controller\PdfControllerTrait](https://github.com/Ang3/PdfBundle/blob/master/src/Controller/PdfControllerTrait.php).
-
-## From anywhere
-
-Inject the service ```ang3_pdf.factory```.
+- Factory class: ```Ang3\Component\Pdf\PdfFactory```
+- Service public alias: ```ang3_pdf.factory```
