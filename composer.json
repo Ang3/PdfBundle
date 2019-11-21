@@ -17,7 +17,7 @@
     "require": {
         "php": "^7.1",
         "ang3/php-pdf": "^1.0",
-        "symfony/framework-bundle": "^3.0 || ^4.0"
+        "symfony/framework-bundle": "^3.4 || ^4.0"
     },
     "require-dev": {
         "symfony/var-dumper": "^4.0",
