@@ -57,7 +57,7 @@ Step 3: Configure your app (recommended)
 I highly recommand to configure the exact path of google chrome and pdfunite:
 
 ```yaml
-# app/config/config.yml
+# config/packages/ang3_pdf.yaml
 ang3_pdf:
   chrome_path: ~ # default value : /usr/bin/google-chrome-stable
   pdfunite_path: ~ # default value : /usr/bin/pdfunite
@@ -70,6 +70,7 @@ Inject the factory class.
 
 ```php
 <?php
+// src/PdfManager.php
 
 use Ang3\Component\Pdf\PdfFactory; // DO NOT FORGET
 
