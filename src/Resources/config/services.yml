@@ -4,10 +4,10 @@ services:
     autoconfigure: true
     public: false
     
-  Ang3\Component\Pdf\PdfFactory: ~
+  Ang3\Component\Pdf\PdfFactory:
+    arguments:
+      $parameters: '%ang3_pdf.parameters%'
 
   ang3_pdf.factory:
     alias: Ang3\Component\Pdf\PdfFactory
-    arguments:
-      - '%ang3_pdf.parameters%'
     public: true
