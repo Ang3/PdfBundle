@@ -16,7 +16,7 @@
     },
     "require": {
         "php": "^7.1",
-        "ang3/php-pdf": "^1.0",
+        "ang3/php-pdf": "^1.0.1",
         "symfony/framework-bundle": "^4.0"
     },
     "require-dev": {
