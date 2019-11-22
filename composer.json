@@ -15,7 +15,7 @@
         "psr-4": { "Ang3\\Bundle\\PdfBundle\\": "src/" }
     },
     "require": {
-        "php": "^7.1",
+        "php": "^7.2",
         "ang3/php-pdf": "^1.0",
         "symfony/config": "^3.4 || ^4.0",
         "symfony/dependency-injection": "^3.4 || ^4.0",

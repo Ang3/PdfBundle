@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "ee7c1ac4536d76b836d67ecd51e6f88a",
+    "content-hash": "7066ae125d5da6b3b81bbe3efc883ea6",
     "packages": [
         {
             "name": "ang3/php-pdf",
@@ -1405,7 +1405,7 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": "^7.1"
+        "php": "^7.2"
     },
     "platform-dev": []
 }

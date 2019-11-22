@@ -3,7 +3,7 @@ PdfBundle
 
 [![Build Status](https://travis-ci.org/Ang3/PdfBundle.svg?branch=master)](https://travis-ci.org/Ang3/PdfBundle) [![Latest Stable Version](https://poser.pugx.org/ang3/pdf-bundle/v/stable)](https://packagist.org/packages/ang3/pdf-bundle) [![Latest Unstable Version](https://poser.pugx.org/ang3/pdf-bundle/v/unstable)](https://packagist.org/packages/ang3/pdf-bundle) [![Total Downloads](https://poser.pugx.org/ang3/pdf-bundle/downloads)](https://packagist.org/packages/ang3/pdf-bundle)
 
-This [Symfony](https://symfony.com) bundle helps you to create PDF files easily with Google Chrome.
+This [Symfony](https://symfony.com) bundle is the integration of the component [ang3/php-pdf](https://github.com/Ang3/php-pdf).
 
 Installation
 ============
