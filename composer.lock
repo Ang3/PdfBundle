@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8f883c853be43190913b39f1e8b4bbe2",
+    "content-hash": "2a4a0174fb9cd16e4ca61f255827b7d0",
     "packages": [
         {
             "name": "ang3/php-pdf",
-            "version": "v1.0.0",
+            "version": "v1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Ang3/php-pdf.git",
-                "reference": "8df284da6be6477abd4904a3d8230f1bbfe4833d"
+                "reference": "72ab7984afb62675b4f458f0e3bced1f6d411551"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Ang3/php-pdf/zipball/8df284da6be6477abd4904a3d8230f1bbfe4833d",
-                "reference": "8df284da6be6477abd4904a3d8230f1bbfe4833d",
+                "url": "https://api.github.com/repos/Ang3/php-pdf/zipball/72ab7984afb62675b4f458f0e3bced1f6d411551",
+                "reference": "72ab7984afb62675b4f458f0e3bced1f6d411551",
                 "shasum": ""
             },
             "require": {
@@ -27,7 +27,6 @@
                 "symfony/process": "^4.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "^7.0",
                 "symfony/phpunit-bridge": "^4.3",
                 "symfony/var-dumper": "^4.3"
             },
@@ -49,7 +48,7 @@
             ],
             "description": "PHP PDF component",
             "homepage": "https://github.com/Ang3/php-pdf",
-            "time": "2019-11-21T23:01:13+00:00"
+            "time": "2019-11-22T00:05:34+00:00"
         },
         {
             "name": "psr/cache",
