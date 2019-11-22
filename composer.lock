@@ -4,31 +4,31 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6e93ea1685059c1a0cdf7500d628071c",
+    "content-hash": "dcc27299373037314af8c9c6c6ab1ef9",
     "packages": [
         {
             "name": "ang3/php-pdf",
-            "version": "v1.0.1",
+            "version": "v1.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Ang3/php-pdf.git",
-                "reference": "72ab7984afb62675b4f458f0e3bced1f6d411551"
+                "reference": "0e526453a6c669fc8060fd238ace6c2ee1ad50c0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Ang3/php-pdf/zipball/72ab7984afb62675b4f458f0e3bced1f6d411551",
-                "reference": "72ab7984afb62675b4f458f0e3bced1f6d411551",
+                "url": "https://api.github.com/repos/Ang3/php-pdf/zipball/0e526453a6c669fc8060fd238ace6c2ee1ad50c0",
+                "reference": "0e526453a6c669fc8060fd238ace6c2ee1ad50c0",
                 "shasum": ""
             },
             "require": {
                 "php": "^7.1",
-                "symfony/console": "^4.0",
-                "symfony/filesystem": "^4.0",
-                "symfony/process": "^4.0"
+                "symfony/console": "^3.4 || ^4.0",
+                "symfony/filesystem": "^3.4 || ^4.0",
+                "symfony/process": "^3.4 || ^4.0"
             },
             "require-dev": {
-                "symfony/phpunit-bridge": "^4.3",
-                "symfony/var-dumper": "^4.3"
+                "symfony/phpunit-bridge": "^3.4 || ^4.0",
+                "symfony/var-dumper": "^3.4 || ^4.0"
             },
             "type": "library",
             "autoload": {
@@ -48,7 +48,7 @@
             ],
             "description": "PHP PDF component",
             "homepage": "https://github.com/Ang3/php-pdf",
-            "time": "2019-11-22T00:05:34+00:00"
+            "time": "2019-11-22T00:29:14+00:00"
         },
         {
             "name": "psr/cache",
