@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "dcc27299373037314af8c9c6c6ab1ef9",
+    "content-hash": "899c4ef67173fd79996e47d299c9632a",
     "packages": [
         {
             "name": "ang3/php-pdf",
